@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ilefa/dining.git"
+    "url": "git+https://github.com/ilefa/blueplate.git"
   },
   "bugs": {
-    "url": "https://github.com/ilefa/dining/issues"
+    "url": "https://github.com/ilefa/blueplate/issues"
   },
-  "homepage": "https://github.com/ilefa/dining#readme",
+  "homepage": "https://github.com/ilefa/blueplate#readme",
   "dependencies": {
     "axios": "^0.21.4"
   },
