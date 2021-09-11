@@ -7,8 +7,10 @@ export type Meal = {
 
 export type DiningHallResponse = {
     hall: DiningHall;
+    time: Date;
+    meals: Meal[];
+    type: keyof typeof DiningHallType;
     status: keyof typeof DiningHallStatus;
-    stations: Meal[]; 
 }
 
 export type DiningHall = {
@@ -139,7 +141,7 @@ export const Weekends = [6, 0];
  * @param type the dining hall to lookup
  * @param date the date to lookup
  */
-export const getMenu = async (type: DiningHallType, date = new Date()) => {
+export const getMenu = async (type: DiningHallType, date = new Date()): Promise<DiningHallResponse> => {
     let hall: DiningHall = DiningHalls[getEnumKeyByEnumValue(DiningHallType, type)];
     let url = `http://nutritionanalysis.dds.uconn.edu/shortmenu.aspx?sName=UCONN+Dining+Services&locationNum=${hall.location.id}&locationName=${hall.location.name}&naFlag=1`;
     if (date.getDate() !== new Date().getDate())
@@ -150,7 +152,10 @@ export const getMenu = async (type: DiningHallType, date = new Date()) => {
         .then(res => res.data)
         .then(html => ({
             ...hall,
+            time: date,
             meals: parseFoodHTML(html),
+            type: getEnumKeyByEnumValue(DiningHallType, type),
+            status: getEnumKeyByEnumValue(DiningHallStatus, getDiningHallStatus(type, date))
         }))
         .catch(_ => null);
 }       
@@ -172,14 +177,14 @@ export const getDiningHallStatus = (type: DiningHallType, date = new Date()) => 
         return DiningHallStatus.CLOSED;
 
     // Before 9AM or Before 9:30AM on Weekdays - South serving breakfast, everything else closed
-    if (hour < 9 || (hour === 9 && minute < 30) && isWeekday(day)) {
+    if (hour < 9 || (hour === 9 && minute < 30) && isWeekend(day)) {
         if (isDiningHall(type, DiningHallType.SOUTH))
             return DiningHallStatus.BREAKFAST;
         return DiningHallStatus.CLOSED;
     }
 
     // Before 10AM or Before 10:30AM on Weekdays - South/Towers serving Brunch, everything else closed
-    if (hour < 10 || (hour === 10 && minute < 30) && isWeekday(day)) {
+    if (hour < 10 || (hour === 10 && minute < 30) && isWeekend(day)) {
         if (isDiningHall(type, DiningHallType.SOUTH, DiningHallType.TOWERS))
             return DiningHallStatus.BRUNCH;
         return DiningHallStatus.CLOSED;
@@ -216,7 +221,7 @@ export const getDiningHallStatus = (type: DiningHallType, date = new Date()) => 
         return DiningHallStatus.DINNER;
 
     // Before 10PM on Late Nights (at LN dining halls) - All serving Late Night
-    if (hour < 22 && isLateNightWeekday(day) && DiningHalls[type].lnComponent)
+    if (hour < 22 && isLateNightWeekday(day) && DiningHalls[type].lateNight)
         return DiningHallStatus.LATE_NIGHT;
     
     // Otherwise, all closed.
