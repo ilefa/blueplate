@@ -176,6 +176,9 @@ export const getDiningHallStatus = (type: DiningHallType, date = new Date()) => 
     if (hour < 7 || (hour < 8 && day === 0))
         return DiningHallStatus.CLOSED;
 
+    if (isWeekend(day) && isDiningHall(type, DiningHallType.BUCKLEY))
+        return DiningHallStatus.CLOSED;
+
     // Before 9AM or Before 9:30AM on Weekdays - South serving breakfast, everything else closed
     if (hour < 9 || (hour === 9 && minute < 30) && isWeekend(day)) {
         if (isDiningHall(type, DiningHallType.SOUTH))
