@@ -145,7 +145,7 @@ export const getMenu = async (type: DiningHallType, date = new Date()): Promise<
     let hall: DiningHall = DiningHalls[getEnumKeyByEnumValue(DiningHallType, type)];
     let url = `http://nutritionanalysis.dds.uconn.edu/shortmenu.aspx?sName=UCONN+Dining+Services&locationNum=${hall.location.id}&locationName=${hall.location.name}&naFlag=1`;
     if (date.getDate() !== new Date().getDate())
-        url += `&WeeksMenus=This+Week%27s+Menus&myaction=read&dtdate=${date.getMonth()}%2f${date.getDay()}%2f${date.getFullYear()}`;
+        url += `&WeeksMenus=This+Week%27s+Menus&myaction=read&dtdate=${date.getMonth() + 1}%2f${date.getDate()}%2f${date.getFullYear()}`;
 
     return await axios
         .get(url)
