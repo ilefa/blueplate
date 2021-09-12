@@ -224,7 +224,7 @@ export const getDiningHallStatus = (type: DiningHallType, date = new Date()) => 
         return DiningHallStatus.DINNER;
 
     // Before 10PM on Late Nights (at LN dining halls) - All serving Late Night
-    if (hour < 22 && isLateNightWeekday(day) && DiningHalls[type].lateNight)
+    if (hour < 22 && isLateNightWeekday(day) && DiningHalls[type]?.lateNight)
         return DiningHallStatus.LATE_NIGHT;
     
     // Otherwise, all closed.
