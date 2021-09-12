@@ -206,7 +206,7 @@ export const getDiningHallStatus = (type: DiningHallType, date = new Date()) => 
     }
 
     // Before 3PM or Before 3:45PM at McMahon - McMahon is closed
-    if (hour < 15 || (hour === 15 && minute < 45) && isDiningHall(type, DiningHallType.MCMAHON))
+    if ((hour < 15 || (hour === 15 && minute < 45)) && isDiningHall(type, DiningHallType.MCMAHON))
         return DiningHallStatus.CLOSED;
 
     // Before 4PM or Before 4:15PM - McMahon starts dinner, all others Between Meals
