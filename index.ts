@@ -21,6 +21,7 @@ export type DiningHall = {
         name: string;
         latitude: number;
         longitude: number;
+        maps: string;
     }
 }
 
@@ -53,7 +54,8 @@ export const DiningHalls: Record<keyof typeof DiningHallType, DiningHall> = {
             id: '03',
             name: 'Buckley+Dining+Hall',
             latitude: 41.805625,
-            longitude: -72.252385
+            longitude: -72.252385,
+            maps: 'https://www.google.com/maps/place/John+Buckley+Residence+Hall,+Storrs,+CT+06269/@41.8057388,-72.2460738,17z/data=!3m1!4b1!4m5!3m4!1s0x89e68a238c8f6bd7:0x234b2994a73acbaf!8m2!3d41.8057348!4d-72.2438851'
         }
     },
     'MCMAHON': {
@@ -63,7 +65,8 @@ export const DiningHalls: Record<keyof typeof DiningHallType, DiningHall> = {
             id: '05',
             name: 'McMahon+Dining+Hall',
             latitude: 41.803548,
-            longitude: -72.252385
+            longitude: -72.252385,
+            maps: 'https://www.google.com/maps/place/McMahon+Dining+Hall/@41.8035583,-72.2546329,17z/data=!3m1!4b1!4m5!3m4!1s0x89e68a3d9478806f:0xc7f055938ed1d0a6!8m2!3d41.8033822!4d-72.2522574'
         }
     },
     'NORTH': {
@@ -73,7 +76,8 @@ export const DiningHalls: Record<keyof typeof DiningHallType, DiningHall> = {
             id: '07',
             name: 'North+Campus+Dining+Hall',
             latitude: 41.812185,
-            longitude: -72.258381
+            longitude: -72.258381,
+            maps: 'https://www.google.com/maps/place/North+Campus+Dining+Hall/@41.8118133,-72.2580436,20.01z/data=!4m12!1m6!3m5!1s0x89e68a3d9478806f:0xc7f055938ed1d0a6!2sMcMahon+Dining+Hall!8m2!3d41.8033822!4d-72.2522574!3m4!1s0x0:0xb9f08e6948417f21!8m2!3d41.8121366!4d-72.2585661',
         }
     },
     'NORTHWEST': {
@@ -83,7 +87,8 @@ export const DiningHalls: Record<keyof typeof DiningHallType, DiningHall> = {
             id: '15',
             name: 'Northwest+Marketplace',
             latitude: 41.811441,
-            longitude: -72.259667
+            longitude: -72.259667,
+            maps: 'https://www.google.com/maps/place/Northwest+Dining+Hall/@41.8112212,-72.2599746,20.01z/data=!3m1!5s0x89e68a3879629c67:0x409c2613356c4ee1!4m5!3m4!1s0x0:0xe476d288c7ffdf1c!8m2!3d41.811443!4d-72.259743'
         }
     },
     'PUTNAM': {
@@ -93,7 +98,8 @@ export const DiningHalls: Record<keyof typeof DiningHallType, DiningHall> = {
             id: '06',
             name: 'Putnam+Dining+Hall',
             latitude: 41.805151,
-            longitude: -72.258880
+            longitude: -72.258880,
+            maps: 'https://www.google.com/maps/place/Putnam+Refectory/@41.8058232,-72.2599886,17.97z/data=!3m1!5s0x89e68a3f9416b0d3:0x4fa606fb32492bef!4m5!3m4!1s0x0:0xe102fa527107db81!8m2!3d41.805226!4d-72.2589772'
         }
     },
     'SOUTH': {
@@ -103,7 +109,8 @@ export const DiningHalls: Record<keyof typeof DiningHallType, DiningHall> = {
             id: '16',
             name: 'South+Campus+Marketplace',
             latitude: 41.803892,
-            longitude: -72.248538
+            longitude: -72.248538,
+            maps: 'https://www.google.com/maps/place/South+Campus+Dining+Hall/@41.8038295,-72.2503784,17.97z/data=!4m5!3m4!1s0x0:0x78bae9af27afcc79!8m2!3d41.8037265!4d-72.2486193'
         }
     },
     'TOWERS': {
@@ -113,22 +120,24 @@ export const DiningHalls: Record<keyof typeof DiningHallType, DiningHall> = {
             id: '42',
             name: 'Gelfenbien+Commons+%26+Halal',
             latitude: 41.813455,
-            longitude: -72.254368
+            longitude: -72.254368,
+            maps: 'https://www.google.com/maps/place/41%C2%B048\'48.4%22N+72%C2%B015\'15.9%22W/@41.8135159,-72.253911,19.46z/data=!4m6!3m5!1s0x89e68a374c6ed731:0xbdf26ec0e2e34ec4!7e2!8m2!3d41.8134318!4d-72.2544378'
         }
     },
     'WHITNEY': {
         name: 'Whitney',
-        lateNight: true,
+        lateNight: false,
         location: {
             id: '01',
             name: 'Whitney+Dining+Hall',
             latitude: 41.809891,
-            longitude: -72.247374
+            longitude: -72.247374,
+            maps: 'https://www.google.com/maps/place/Edwina+Whitney+Residence+Hall/@41.8101301,-72.2475367,19z/data=!4m5!3m4!1s0x89e68a253a40d1e5:0xa1fbff3b6e368cf4!8m2!3d41.8099587!4d-72.2472346'
         }
     }
 }
 
-export const LateNightDiningHalls = [DiningHallType.MCMAHON, DiningHallType.NORTHWEST, DiningHallType.WHITNEY];
+export const LateNightDiningHalls = [DiningHallType.MCMAHON, DiningHallType.NORTHWEST];
 export const LateNightWeekdays = [0, 1, 2, 3, 4];
 export const Weekdays = [1, 2, 3, 4, 5];
 export const Weekends = [6, 0];
