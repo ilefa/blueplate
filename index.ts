@@ -161,11 +161,7 @@ export const Weekends = [6, 0];
  */
 export const getMenu = async (type: DiningHallType, date = new Date()): Promise<DiningHallResponse> => {
     let hall: DiningHall = DiningHalls[getEnumKeyByEnumValue(DiningHallType, type)];
-    let url = `http://nutritionanalysis.dds.uconn.edu/shortmenu.aspx?sName=UCONN+Dining+Services&locationNum=${hall.location.id}&locationName=${hall.location.name}&naFlag=1`;
-    if (date.getMonth() !== new Date().getMonth()
-        || date.getFullYear() !== new Date().getFullYear()
-        || date.getDate() !== new Date().getDate())
-            url += `&WeeksMenus=This+Week%27s+Menus&myaction=read&dtdate=${moment(date).format('MM')}%2f${date.getDate()}%2f${date.getFullYear()}`;
+    let url = `http://nutritionanalysis.dds.uconn.edu/shortmenu.aspx?sName=UCONN+Dining+Services&locationNum=${hall.location.id}&locationName=${hall.location.name}&naFlag=1&WeeksMenus=This+Week%27s+Menus&myaction=read&dtdate=${moment(date).format('MM')}%2f${date.getDate()}%2f${date.getFullYear()}`;
 
     return await axios
         .get(url)
