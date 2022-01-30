@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 export type Meal = {
     name: string;
@@ -161,11 +162,10 @@ export const Weekends = [6, 0];
 export const getMenu = async (type: DiningHallType, date = new Date()): Promise<DiningHallResponse> => {
     let hall: DiningHall = DiningHalls[getEnumKeyByEnumValue(DiningHallType, type)];
     let url = `http://nutritionanalysis.dds.uconn.edu/shortmenu.aspx?sName=UCONN+Dining+Services&locationNum=${hall.location.id}&locationName=${hall.location.name}&naFlag=1`;
-    let now = new Date();
-    if (date.getMonth() !== now.getMonth()
-        || date.getFullYear() !== now.getFullYear()
+    if (date.getMonth() !== new Date().getMonth()
+        || date.getFullYear() !== new Date().getFullYear()
         || date.getDate() !== new Date().getDate())
-        url += `&WeeksMenus=This+Week%27s+Menus&myaction=read&dtdate=${date.getMonth() + 1}%2f${date.getDate()}%2f${date.getFullYear()}`;
+            url += `&WeeksMenus=This+Week%27s+Menus&myaction=read&dtdate=${moment(date).format('MM')}%2f${date.getDate()}%2f${date.getFullYear()}`;
 
     return await axios
         .get(url)
