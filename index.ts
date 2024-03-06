@@ -26,6 +26,20 @@ export type DiningHall = {
     }
 }
 
+export type DiningHallSchedules = {
+    [key in keyof typeof DiningHallType]: DiningHallHoursMap;
+}
+
+export type DiningHallHoursMap = {
+    [key in keyof typeof ActiveDiningStatuses]: DiningHallHours[]
+}
+
+export type DiningHallHours = {
+    start: string;
+    end: string;
+    days: number[];
+}
+
 export enum DiningHallStatus {
     BREAKFAST = 'Breakfast',
     LUNCH = 'Lunch',
@@ -34,6 +48,14 @@ export enum DiningHallStatus {
     LATE_NIGHT = 'Late Night',
     BETWEEN_MEALS = 'Between Meals',
     CLOSED = 'Closed',
+}
+
+export enum ActiveDiningStatuses {
+    BREAKFAST = 'Breakfast',
+    LUNCH = 'Lunch',
+    BRUNCH = 'Brunch',
+    DINNER = 'Dinner',
+    LATE_NIGHT = 'Late Night',
 }
 
 export enum DiningHallType {
@@ -148,8 +170,85 @@ export const DiningHalls: Record<keyof typeof DiningHallType, DiningHall> = {
 
 export const LateNightDiningHalls = [DiningHallType.MCMAHON, DiningHallType.NORTHWEST];
 export const LateNightWeekdays = [0, 1, 2, 3, 4];
+export const AllDays = [0, 1, 2, 3, 4, 5, 6];
 export const Weekdays = [1, 2, 3, 4, 5];
 export const Weekends = [6, 0];
+
+export const DiningHallHours: DiningHallSchedules = {
+    BUCKLEY: {
+        'BREAKFAST': [{ start: '7:00 AM', end: '10:45 AM', days: Weekdays }],
+        'BRUNCH': [],
+        'LATE_NIGHT': [],
+        'LUNCH': [{ start: '11:00 AM', end: '2:30 PM', days: Weekdays }],
+        'DINNER': [{ start: '4:00 PM', end: '7:15 PM', days: Weekdays }],
+        
+    },
+    MCMAHON: {
+        'BREAKFAST': [{ start: '7:00 AM', end: '10:45 AM', days: Weekdays }],
+        'BRUNCH': [{ start: '10:30 AM', end: '2:15 PM', days: Weekends }],
+        'LUNCH': [{ start: '11:00 AM', end: '2:15 PM', days: Weekdays }],
+        'DINNER': [
+            { start: '3:45 PM', end: '7:15 PM', days: Weekdays },
+            { start: '3:45 PM', end: '7:15 PM', days: Weekends }
+        ],
+        'LATE_NIGHT': [{ start: '7:15 PM', end: '10:00 PM', days: LateNightWeekdays }]
+    },
+    NORTH: {
+        'BREAKFAST': [{ start: '7:00 AM', end: '10:45 AM', days: Weekdays }],
+        'BRUNCH': [{ start: '10:30 AM', end: '3:00 PM', days: Weekends }],
+        'LATE_NIGHT': [],
+        'LUNCH': [{ start: '11:00 AM', end: '3:00 PM', days: Weekdays }],
+        'DINNER': [{ start: '4:30 PM', end: '7:15 PM', days: AllDays }],
+    },
+    NORTHWEST: {
+        'BREAKFAST': [{ start: '7:00 AM', end: '10:45 AM', days: Weekdays }],
+        'BRUNCH': [{ start: '10:30 AM', end: '2:15 PM', days: Weekends }],
+        'LUNCH': [{ start: '11:00 AM', end: '2:15 PM', days: Weekdays }],
+        'DINNER': [
+            { start: '3:45 PM', end: '7:15 PM', days: Weekdays },
+            { start: '3:45 PM', end: '7:15 PM', days: Weekends }
+        ],
+        'LATE_NIGHT': [{ start: '7:15 PM', end: '10:00 PM', days: LateNightWeekdays }]
+    },
+    PUTNAM: {
+        'BREAKFAST': [
+            { start: '7:00 AM', end: '10:45 AM', days: Weekdays },
+            { start: '9:30 AM', end: '10:30 AM', days: Weekends }, 
+        ],
+        'BRUNCH': [{ start: '10:30 AM', end: '2:30 PM', days: Weekends }],
+        'LATE_NIGHT': [],
+        'LUNCH': [{ start: '11:00 AM', end: '2:30 PM', days: Weekdays }],
+        'DINNER': [{ start: '4:00 PM', end: '7:15 PM', days: AllDays }],
+    },
+    SOUTH: {
+        'BREAKFAST': [
+            { start: '7:00 AM', end: '10:45 AM', days: Weekdays },
+            { start: '7:00 AM', end: '10:30 AM', days: [6] },
+            { start: '8:00 AM', end: '10:30 AM', days: [0] }
+        ],
+        'BRUNCH': [{ start: '10:30 AM', end: '2:00 PM', days: Weekends }],
+        'LATE_NIGHT': [],
+        'LUNCH': [{ start: '11:00 AM', end: '2:00 PM', days: Weekdays }],
+        'DINNER': [{ start: '3:30 PM', end: '7:15 PM', days: AllDays }],
+    },
+    TOWERS: {
+        'BREAKFAST': [
+            { start: '7:00 AM', end: '10:45 AM', days: Weekdays },
+            { start: '9:30 AM', end: '10:30 AM', days: Weekends }
+        ],
+        'BRUNCH': [{ start: '10:30 AM', end: '2:30 PM', days: Weekends }],
+        'LATE_NIGHT': [],
+        'LUNCH': [{ start: '11:00 AM', end: '2:30 PM', days: Weekdays }],
+        'DINNER': [{ start: '4:00 PM', end: '7:15 PM', days: AllDays }],
+    },
+    WHITNEY: {
+        'BREAKFAST': [{ start: '7:00 AM', end: '10:45 AM', days: Weekdays }],
+        'BRUNCH': [{ start: '10:30 AM', end: '3:00 PM', days: Weekends }],
+        'LATE_NIGHT': [],
+        'LUNCH': [{ start: '11:00 AM', end: '3:00 PM', days: Weekdays }],
+        'DINNER': [{ start: '4:30 PM', end: '7:15 PM', days: AllDays }],
+    }
+}
 
 /**
  * Attempts to retrieve information about the current
@@ -171,7 +270,7 @@ export const getMenu = async (type: DiningHallType, date = new Date()): Promise<
             time: date,
             meals: parseFoodHTML(html),
             type: getEnumKeyByEnumValue(DiningHallType, type),
-            status: getEnumKeyByEnumValue(DiningHallStatus, getDiningHallStatus(type, date))
+            status: getDiningHallStatus(type, date)
         }))
         .catch(_ => null);
 }       
@@ -184,69 +283,44 @@ export const getMenu = async (type: DiningHallType, date = new Date()): Promise<
  * @param date the date/time to lookup (or right now if not provided)
  */
 export const getDiningHallStatus = (type: DiningHallType, date = new Date()) => {
-    let day = date.getDay();
-    let hour = date.getHours();
-    let minute = date.getMinutes();
     let key = getEnumKeyByEnumValue(DiningHallType, type);
 
-    // Before 7AM or before 8AM on Sunday - all dining halls closed
-    if (hour < 7 || (hour < 8 && day === 0))
-        return DiningHallStatus.CLOSED;
+    // search DiningHallHours for the current status
+    let hours = DiningHallHours[key] as DiningHallHoursMap;
+    let status = Object.keys(hours).find(status => {
+        let ranges = hours[status];
+        for (let range of ranges) if (range.days.includes(date.getDay())) {
+            let start = moment(range.start, 'h:mm A');
+            let end = moment(range.end, 'h:mm A');
+            return moment(date).isBetween(start, end);
+        }
+    });
 
-    // Buckley closed on weekends
-    if (isWeekend(day) && isDiningHall(type, DiningHallType.BUCKLEY))
-        return DiningHallStatus.CLOSED;
+    if (!status) {
+        console.log('no status ...', moment(date).format('MMM Do YYYY, h:mm:ss a'))
 
-    // Before 9AM or Before 9:30AM on weekends - South serving breakfast, everything else closed
-    if (hour < 9 || (hour === 9 && minute < 30) && isWeekend(day)) {
-        if (isDiningHall(type, DiningHallType.SOUTH))
-            return DiningHallStatus.BREAKFAST;
-        return DiningHallStatus.CLOSED;
+        // get breakfast start time for today, or if no breakfast, return closed
+        let breakfast = hours['BREAKFAST'].find(range => range.days.includes(date.getDay()));
+        if (!breakfast) return 'CLOSED';
+        let start = moment(breakfast.start, 'h:mm A');
+        
+        console.log('breakfast start =', moment(start).format('MMM Do YYYY, h:mm:ss a'))
+
+        // get latest end time for today
+        let latest = Math.max(...Object.values(hours).map(status => status
+            .filter(range => range.days.includes(date.getDay()))
+            .map(range => moment(range.end, 'h:mm A').valueOf())
+        ).flat());
+
+        console.log('latest end =', moment(latest).format('MMM Do YYYY, h:mm:ss a'))
+
+        // check if `date` is between start and latest
+        let between = moment(date).isBetween(start, moment(latest));
+        console.log('between =', between)
+        return between ? 'BETWEEN_MEALS' : 'CLOSED';
     }
 
-    // Before 10AM or Before 10:30AM on Weekdays - South/Towers serving Brunch, everything else closed
-    if (hour < 10 || (hour === 10 && minute < 30) && isWeekend(day)) {
-        if (isDiningHall(type, DiningHallType.SOUTH, DiningHallType.TOWERS))
-            return DiningHallStatus.BRUNCH;
-        return DiningHallStatus.CLOSED;
-    }
-
-    // Before 10AM or Before 10:45AM on Weekdays - All serving breakfast
-    if (hour < 10 || (hour === 10 && minute < 45) && isWeekday(day))
-        return DiningHallStatus.BREAKFAST;
-
-    // Before 11AM on Weekdays, all between meals
-    if (hour < 11 && isWeekday(day))
-        return DiningHallStatus.BETWEEN_MEALS;
-
-    // Before 2PM or Before 2:15PM, on weekends all serving Brunch, otherwise all serving Lunch
-    if (hour < 14 || (hour === 14 && minute < 15)) {
-        if (isWeekend(day))
-            return DiningHallStatus.BRUNCH;
-        return DiningHallStatus.LUNCH;
-    }
-
-    // Before 3PM or Before 3:45PM at McMahon - McMahon is closed
-    if ((hour < 15 || (hour === 15 && minute < 45)) && isDiningHall(type, DiningHallType.MCMAHON))
-        return DiningHallStatus.CLOSED;
-
-    // Before 4PM or Before 4:15PM - McMahon starts dinner, all others Between Meals
-    if (hour < 16 || (hour === 16 && minute < 15)) {
-        if (isDiningHall(type, DiningHallType.MCMAHON))
-            return DiningHallStatus.DINNER;
-        return DiningHallStatus.BETWEEN_MEALS;
-    }
-
-    // Before 7PM or Before 7:15PM - All serving Dinner
-    if (hour < 19 || (hour === 19 && minute < 15))
-        return DiningHallStatus.DINNER;
-
-    // Before 10PM on Late Nights (at LN dining halls) - All serving Late Night
-    if (hour < 22 && isLateNightWeekday(day) && DiningHalls[key].lateNight)
-        return DiningHallStatus.LATE_NIGHT;
-    
-    // Otherwise, all closed.
-    return DiningHallStatus.CLOSED;
+    return status ?? 'CLOSED';
 }
 
 const parseFoodHTML = (html: string) => {
@@ -311,10 +385,9 @@ const parseFoodStationOptions = (html: string) => {
             .substring(1) ?? 'Unknown');
 }
 
-const isDiningHall = (provided: DiningHallType, ...type: DiningHallType[]) => type.includes(provided);
-const isWeekday = (day: number) => Weekdays.includes(day);
-const isWeekend = (day: number) => Weekends.includes(day);
-const isLateNightWeekday = (day: number) => LateNightWeekdays.includes(day);
+export const isWeekday = (day: number) => Weekdays.includes(day);
+export const isWeekend = (day: number) => Weekends.includes(day);
+export const isLateNightWeekday = (day: number) => LateNightWeekdays.includes(day);
 
 const getEnumKeyByEnumValue = (target: any, value: string, caseSensitive = true) => {
     let keys = Object

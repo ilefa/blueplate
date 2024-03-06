@@ -1,6 +1,6 @@
 # Blueplate
 
-![version badge](https://img.shields.io/badge/version-1.0.0-blue)
+![version badge](https://img.shields.io/badge/version-1.1.0-blue)
 
 Blueplate is a TypeScript library that allows you to easily fetch menus for UConn Dining Halls.
 
@@ -10,12 +10,6 @@ Use npm to install Blueplate.
 
 ```bash
 npm install @ilefa/blueplate
-```
-
-Since Blueplate is currently hosted on GitHub packages, you will need to make a ``.npmrc`` file in the root of your project, and insert the following:
-
-```env
-@ilefa:registry=https://npm.pkg.github.com
 ```
 
 ## Usage
@@ -29,6 +23,7 @@ let meals = await getMenu(DiningHallType.SOUTH);
 {
    "name": "South",
    "lateNight": false,
+   "status": "LUNCH",
    "location": {
       "id": "16",
       "name": "South+Campus+Marketplace",

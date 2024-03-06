@@ -1,33 +1,30 @@
 {
-  "name": "@ilefa/blueplate",
-  "version": "1.0.5-2",
-  "author": "ILEFA Labs",
-  "license": "GPL-3.0",
-  "description": "Internal API to fetch Dining Hall Menus",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "prepare": "rm -rf dist && npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ilefa/blueplate.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ilefa/blueplate/issues"
-  },
-  "homepage": "https://github.com/ilefa/blueplate#readme",
-  "dependencies": {
-    "axios": "^0.21.4",
-    "moment": "^2.29.1"
-  },
-  "devDependencies": {
-    "@types/node": "^16.9.1",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.2"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  }
+    "name": "@ilefa/blueplate",
+    "version": "1.1.0",
+    "author": "ILEFA Labs",
+    "license": "GPL-3.0",
+    "description": "Internal API to fetch Dining Hall Menus",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "prepare": "rm -rf dist && npm run build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ilefa/blueplate.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ilefa/blueplate/issues"
+    },
+    "homepage": "https://github.com/ilefa/blueplate#readme",
+    "dependencies": {
+        "axios": "^1.6.7",
+        "moment": "^2.29.1"
+    },
+    "devDependencies": {
+        "@types/node": "^16.9.1",
+        "ts-node": "^10.2.1",
+        "typescript": "^4.4.2"
+    }
 }
