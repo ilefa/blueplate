@@ -297,26 +297,19 @@ export const getDiningHallStatus = (type: DiningHallType, date = new Date()) => 
     });
 
     if (!status) {
-        console.log('no status ...', moment(date).format('MMM Do YYYY, h:mm:ss a'))
-
         // get breakfast start time for today, or if no breakfast, return closed
         let breakfast = hours['BREAKFAST'].find(range => range.days.includes(date.getDay()));
         if (!breakfast) return 'CLOSED';
         let start = moment(breakfast.start, 'h:mm A');
         
-        console.log('breakfast start =', moment(start).format('MMM Do YYYY, h:mm:ss a'))
-
         // get latest end time for today
         let latest = Math.max(...Object.values(hours).map(status => status
             .filter(range => range.days.includes(date.getDay()))
             .map(range => moment(range.end, 'h:mm A').valueOf())
         ).flat());
 
-        console.log('latest end =', moment(latest).format('MMM Do YYYY, h:mm:ss a'))
-
         // check if `date` is between start and latest
         let between = moment(date).isBetween(start, moment(latest));
-        console.log('between =', between)
         return between ? 'BETWEEN_MEALS' : 'CLOSED';
     }
 
